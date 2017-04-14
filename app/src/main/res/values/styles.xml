@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="CustomTheme">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorTextPrimaryInverse</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomTheme" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorPrimaryInverse">@color/colorTextPrimaryInverse</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+    </style>
+
+</resources>
