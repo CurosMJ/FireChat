@@ -1,5 +1,7 @@
 package in.curos.firechat.screens;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.FrameLayout;
 
@@ -11,10 +13,25 @@ public abstract class Screen<Controller extends Screen.ControllerContract> exten
 
     protected Controller controller;
 
+    protected ProgressDialog loadingDialog;
+
     public Screen(Context context, Controller controller) {
         super(context);
         this.controller = controller;
+
+        loadingDialog = new ProgressDialog(context);
+        loadingDialog.setIndeterminate(true);
+        loadingDialog.setMessage("Loading...");
+
         initialize();
+    }
+
+    public void showLoading() {
+        loadingDialog.show();
+    }
+
+    public void hideLoading() {
+        loadingDialog.hide();
     }
 
     abstract public void initialize();

@@ -13,14 +13,8 @@ import in.curos.firechat.R;
 
 public class LoginScreen extends Screen<LoginScreen.LoginScreenController> {
 
-    private ProgressDialog loadingDialog;
-
     public LoginScreen(Context context, LoginScreenController loginScreenController) {
         super(context, loginScreenController);
-
-        loadingDialog = new ProgressDialog(context);
-        loadingDialog.setIndeterminate(true);
-        loadingDialog.setMessage("Loading...");
     }
 
     public void initialize() {
@@ -32,14 +26,6 @@ public class LoginScreen extends Screen<LoginScreen.LoginScreenController> {
     @OnClick(R.id.sign_in)
     public void btnClick() {
         controller.initiateLogin();
-    }
-
-    public void showLoading() {
-        loadingDialog.show();
-    }
-
-    public void hideLoading() {
-        loadingDialog.hide();
     }
 
     public interface LoginScreenController extends Screen.ControllerContract {

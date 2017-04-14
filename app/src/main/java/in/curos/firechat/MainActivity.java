@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -20,17 +19,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import in.curos.firechat.models.User;
 import in.curos.firechat.screens.LoginScreen;
 
 public class MainActivity extends FragmentActivity implements LoginScreen.LoginScreenController, FirebaseAuth.AuthStateListener, GoogleApiClient.OnConnectionFailedListener {
 
-    public static final String TAG = "LOGIN";
     int RC_SIGN_IN = 123;
+
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
 
     private LoginScreen view;
+
+    private DatabaseReference users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class MainActivity extends FragmentActivity implements LoginScreen.LoginS
         view = new LoginScreen(this, this);
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
+
+        users = FirebaseDatabase.getInstance().getReference("/users/");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -79,7 +85,7 @@ public class MainActivity extends FragmentActivity implements LoginScreen.LoginS
                 view.showLoading();
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             } else {
                 Toast.makeText(MainActivity.this, "Google sign in failed.", Toast.LENGTH_SHORT).show();
             }
@@ -87,18 +93,14 @@ public class MainActivity extends FragmentActivity implements LoginScreen.LoginS
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         view.hideLoading();
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -109,13 +111,17 @@ public class MainActivity extends FragmentActivity implements LoginScreen.LoginS
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
-            // User is signed in
-            Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+            User dbUser = new User(user.getUid(), user.getDisplayName(), user.getEmail());
 
-            Toast.makeText(this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
-        } else {
-            // User is signed out
-            Log.d(TAG, "onAuthStateChanged:signed_out");
+            DatabaseReference firebaseUser = users.child(dbUser.id);
+
+            firebaseUser.child("name").setValue(dbUser.name);
+            firebaseUser.child("id").setValue(dbUser.id);
+            firebaseUser.child("email").setValue(dbUser.email);
+
+            Intent intent = new Intent(this, SelectChatRoomActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
