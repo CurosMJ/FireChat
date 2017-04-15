@@ -3,16 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="CustomTheme">
         <!-- Customize your theme here. -->
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">@color/colorPrimary</item>
+    <style name="AppTheme.ActionBar" parent="AppTheme">
     </style>
 
-    <style name="CustomTheme" parent="Theme.AppCompat.Light">
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -20,15 +18,6 @@
         <item name="android:textColorPrimaryInverse">@color/colorTextPrimaryInverse</item>
         <item name="android:colorBackground">@color/colorBackground</item>
     </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="MessageBox">
         <item name="android:paddingTop">8dp</item>

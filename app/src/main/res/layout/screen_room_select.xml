@@ -5,15 +5,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Toolbar
-            android:elevation="8dp"
-            android:theme="@style/AppTheme.ActionBar"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
 
         <ScrollView
-            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

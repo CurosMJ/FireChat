@@ -1,18 +1,15 @@
 package in.curos.firechat;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,21 +19,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Iterator;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import in.curos.firechat.models.Room;
 import in.curos.firechat.screens.RoomSelectScreen;
 
 /**
  * Created by curos on 14/04/17.
  */
 
-public class SelectChatRoomActivity extends Activity implements RoomSelectScreen.Controller {
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+public class SelectChatRoomActivity extends AppCompatActivity implements RoomSelectScreen.Controller {
 
     RoomSelectScreen roomSelectScreen;
     DatabaseReference rooms;
@@ -52,10 +41,7 @@ public class SelectChatRoomActivity extends Activity implements RoomSelectScreen
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        ButterKnife.bind(this);
-
-        toolbar.setTitle("FireChat : Subscribed Rooms");
-        setActionBar(toolbar);
+        getSupportActionBar().setTitle("FireChat : Subscribed Rooms");
 
         roomSelectScreen.showLoading();
 

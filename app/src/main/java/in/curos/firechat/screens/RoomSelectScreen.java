@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,9 +19,6 @@ public class RoomSelectScreen extends Screen<RoomSelectScreen.Controller> {
 
     @BindView(R.id.layout)
     LinearLayout layout;
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     OnClickListener clickListener;
 

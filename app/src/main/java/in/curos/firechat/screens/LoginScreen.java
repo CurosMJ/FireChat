@@ -1,6 +1,5 @@
 package in.curos.firechat.screens;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
 import butterknife.ButterKnife;

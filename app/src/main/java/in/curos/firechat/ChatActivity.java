@@ -2,7 +2,6 @@ package in.curos.firechat;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,12 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import in.curos.firechat.models.Message;
-import in.curos.firechat.models.Room;
 import in.curos.firechat.screens.ChatScreen;
 
 public class ChatActivity extends AppCompatActivity implements ChatScreen.Controller {
@@ -33,16 +28,12 @@ public class ChatActivity extends AppCompatActivity implements ChatScreen.Contro
 
     FirebaseUser user;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         view = new ChatScreen(this, this);
         setContentView(view);
-        ButterKnife.bind(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -73,9 +64,7 @@ public class ChatActivity extends AppCompatActivity implements ChatScreen.Contro
         });
         messages.addChildEventListener(new MessageEventListener());
 
-
-        toolbar.setTitle(reference);
-        setActionBar(toolbar);
+        getSupportActionBar().setTitle(reference);
     }
 
     @Override
