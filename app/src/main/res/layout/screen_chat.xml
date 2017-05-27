@@ -8,10 +8,11 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/bottom_bar_container"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:id="@+id/bottom_bar_container"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -30,13 +31,13 @@
                 android:id="@+id/send_btn"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:backgroundTint="@color/colorPrimary"
+                app:elevation="0dp"
                 android:src="@drawable/ic_send_white_48dp"
                 android:layout_width="48dp"
                 android:layout_height="48dp" />
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:paddingTop="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:id="@+id/messages"
